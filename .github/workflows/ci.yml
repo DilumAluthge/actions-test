@@ -16,7 +16,7 @@ jobs:
           # - macos-11
           - macos-12
           - macos-13
-          # - macos-14
+          - macos-14
         julia-version:
           - '1.6'
           - '1.7'
