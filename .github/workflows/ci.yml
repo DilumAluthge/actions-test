@@ -15,7 +15,7 @@ jobs:
         github-runner:
           # - macos-11
           - macos-12
-          - macos-13
+          # - macos-13
           - macos-14
         julia-version:
           - '1.6'
@@ -23,9 +23,16 @@ jobs:
           - '1.8'
           - '1.9'
           - '1.10'
-        # julia-arch:
-        #   - x64
-        #   - aarch64
+        julia-arch:
+          - ${{ runner.arch }}
+        exclude:
+          - github-runner: macos-14
+            julia-version: '1.6'
+            julia-arch: ${{ runner.arch }}
+        include:
+          - github-runner: macos-14
+            julia-version: '1.6'
+            julia-arch: 'x64'
     steps:
       - name: Print the CPU architecture of the runner
         run: uname -m
