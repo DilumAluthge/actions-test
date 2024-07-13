@@ -32,7 +32,7 @@ jobs:
       - name: Print full operating system details of the runner
         run: uname -a
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - uses: julia-actions/setup-julia@6fbdfca8ac0f83199ed8d504f8d31ea177e04bf6 # my PR
+      - uses: julia-actions/setup-julia@dpa/macos-14-julia-1.6 # my PR branch
         with:
           version: ${{ matrix.julia-version }}
           # arch: ${{ matrix.julia-arch }}
