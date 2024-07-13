@@ -23,6 +23,16 @@ jobs:
           - '1.8'
           - '1.9'
           - '1.10'
+        exclude:
+          - github-runner: macos-14
+            julia-version: '1.6'
+          - github-runner: macos-14
+            julia-version: '1.7'
+        include:
+          - github-runner: macos-13
+            julia-version: '1.6'
+          - github-runner: macos-13
+            julia-version: '1.7'
         # julia-arch:
         #   - x64
         #   - aarch64
