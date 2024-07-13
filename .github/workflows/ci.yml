@@ -1,0 +1,43 @@
+name: CI
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ${{ matrix.github-runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        github-runner:
+          # - macos-11
+          - macos-12
+          - macos-13
+          # - macos-14
+        julia-version:
+          - '1.6'
+          - '1.7'
+          - '1.8'
+          - '1.9'
+          - '1.10'
+        # julia-arch:
+        #   - x64
+        #   - aarch64
+    steps:
+      - name: Print the CPU architecture of the runner
+        run: uname -m
+      - name: Print full operating system details of the runner
+        run: uname -a
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+      - uses: julia-actions/setup-julia@3645a07f58c7f83b9f82ac8e0bb95583e69149e6 # v2.2.0
+        with:
+          version: ${{ matrix.julia-version }}
+          # arch: ${{ matrix.julia-arch }}
+      - run: which -a julia
+      - run: julia --version
+      - run: julia -e 'import InteractiveUtils; InteractiveUtils.versioninfo(; verbose = true)'
+      - run: julia -e '@show Base.julia_cmd()[1]'
+      - run: julia -e '@show Base.BinaryPlatforms.HostPlatform()'
